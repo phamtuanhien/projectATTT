@@ -6,6 +6,8 @@ const data = {
   sdt: 10100333,
   diachi: "Lào cai",
   chucvu: "Nhân viên AHT",
+  gioitinh: "Nam",
+  ngaysinh: "01/01/2000",
 };
 
 function InfoCard() {
@@ -17,6 +19,8 @@ function InfoCard() {
         <p>Số điện thoại:</p>
         <p>Địa chỉ:</p>
         <p>Chức vụ, nơi làm việc:</p>
+        <p>Giới tính</p>
+        <p>Ngày sinh</p>
       </div>
       <div className="info__right">
         <p>{data.hoten}</p>
@@ -24,6 +28,8 @@ function InfoCard() {
         <p>{data.sdt}</p>
         <p>{data.diachi}</p>
         <p>{data.chucvu}</p>
+        <p>{data.gioitinh}</p>
+        <p>{data.ngaysinh}</p>
       </div>
     </div>
   );

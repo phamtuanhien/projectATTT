@@ -16,6 +16,12 @@ function Header() {
         <Link to="/info" className="link">
           Thông tin cá nhân
         </Link>
+        <Link to="/cutri" className="link">
+          Danh sách cử tri
+        </Link>
+        <Link to="/ungvien" className="link">
+          Danh sách ứng viên
+        </Link>
       </div>
       <div className="header__right">
         <Link className="link" to="/login">

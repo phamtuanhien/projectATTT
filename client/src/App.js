@@ -6,6 +6,8 @@ import Header from "./components/Header";
 import Register from "./pages/Register";
 import Vote from "./pages/Vote";
 import Info from "./pages/Info";
+import Cutri from "./pages/Cutri";
+import Ungvien from "./pages/Ungvien";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/register" exact component={Register} />
         <Route path="/vote" exact component={Vote} />
         <Route path="/info" exact component={Info} />
+        <Route path="/cutri" exact component={Cutri} />
+        <Route path="/ungvien" exact component={Ungvien} />
       </Router>
     </div>
   );
