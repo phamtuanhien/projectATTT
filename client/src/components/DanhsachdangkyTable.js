@@ -7,42 +7,41 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-
 const useStyles = makeStyles({
   table: {
-    minWidth: 500,
+    minWidth: 650,
   },
 });
-
-export default function RegisterTable({ data: rows }) {
+function DanhsachdangkyTable({ data: rows, setSelect, setOpen }) {
   const classes = useStyles();
+  const handleOnClick = (e, k) => {
+    setSelect(k);
+    console.log(k);
+    setOpen(false);
+  };
 
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>CMND</TableCell>
-            <TableCell>Định danh</TableCell>
-            <TableCell>Bí danh</TableCell>
-            <TableCell>Số ngẫu nhiên</TableCell>
-            <TableCell>Tình trạng</TableCell>
-            <TableCell>Chữ ký trên bí danh</TableCell>
-            <TableCell>Chữ ký trên định danh</TableCell>
+            <TableCell align="center">CMND</TableCell>
+            <TableCell align="center">Bí danh</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.cmnd}>
+            <TableRow
+              key={row.cmnd}
+              onClick={(e) => {
+                handleOnClick(e, row);
+              }}
+              className="table-row"
+            >
               <TableCell component="th" scope="row">
                 {row.cmnd}
               </TableCell>
-              <TableCell>{row.dinhdanh}</TableCell>
               <TableCell>{row.bidanh}</TableCell>
-              <TableCell>{row.songaunhien}</TableCell>
-              <TableCell>{row.tinhtrang}</TableCell>
-              <TableCell>{row.chukybidanh}</TableCell>
-              <TableCell>{row.chukydinhdanh}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -50,3 +49,5 @@ export default function RegisterTable({ data: rows }) {
     </TableContainer>
   );
 }
+
+export default DanhsachdangkyTable;

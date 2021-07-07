@@ -8,6 +8,8 @@ import Vote from "./pages/Vote";
 import Info from "./pages/Info";
 import Cutri from "./pages/Cutri";
 import Ungvien from "./pages/Ungvien";
+import Danhsachdangky from "./pages/Danhsachdangky";
+import Danhsachkiemtra from "./pages/Danhsachkiemtra";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
         <Route path="/info" exact component={Info} />
         <Route path="/cutri" exact component={Cutri} />
         <Route path="/ungvien" exact component={Ungvien} />
+        <Route path="/danhsachdangky" exact component={Danhsachdangky} />
+        <Route path="/danhsachkiemtra" exact component={Danhsachkiemtra} />
       </Router>
     </div>
   );

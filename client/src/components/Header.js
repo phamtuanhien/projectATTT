@@ -22,6 +22,12 @@ function Header() {
         <Link to="/ungvien" className="link">
           Danh sách ứng viên
         </Link>
+        <Link to="/danhsachdangky" className="link">
+          Danh sách đăng ký
+        </Link>
+        <Link to="/danhsachkiemtra" className="link">
+          Danh sách kiểm tra
+        </Link>
       </div>
       <div className="header__right">
         <Link className="link" to="/login">
