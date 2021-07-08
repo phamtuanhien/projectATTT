@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const sequelize = require('./connection')
-const Cutri = sequelize.define('Cutri',{
+const Cutri = sequelize.define('cutri',{
     cutriID:{
         type : Sequelize.INTEGER,
         allowNull : false,

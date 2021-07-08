@@ -14,6 +14,10 @@ const Account = sequelize.define('account',{
     password:{
         type : Sequelize.STRING(25),
         allowNull : false
+    },
+    role : {
+        type : Sequelize.STRING(45),
+        allowNull : false
     }
 },{
     freezeTableName : true,

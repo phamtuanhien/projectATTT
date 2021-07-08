@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const sequelize = require('./connection')
-const PhieubauEncode = sequelize.define('PhieubauEncode',{
+const PhieubauEncode = sequelize.define('phieubau_encoded',{
     cutriID:{
         type : Sequelize.INTEGER,
         allowNull : false,

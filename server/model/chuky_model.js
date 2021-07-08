@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const sequelize = require('./connection')
-const Chuky = sequelize.define('Chuky',{
+const Chuky = sequelize.define('chuky',{
     cmnd:{
         type : Sequelize.INTEGER,
         allowNull : false,
