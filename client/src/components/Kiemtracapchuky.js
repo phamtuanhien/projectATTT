@@ -7,7 +7,6 @@ function Kiemtracapchuky({ data, setOpen }) {
   const verify = () => {
     setChuKy("adasd");
   };
-
   const done = () => {
     setOpen(true);
   };

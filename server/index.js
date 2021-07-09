@@ -1,15 +1,15 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const multer = require('multer')
-const https = require('https')
-const path = require('path')
-const fs = require('fs')
-const cors = require('cors')
-const dotenv = require('dotenv')
-const cookieParser = require('cookie-parser')
+const express = require("express");
+const bodyParser = require("body-parser");
+const multer = require("multer");
+const https = require("https");
+const path = require("path");
+const fs = require("fs");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
 
-dotenv.config()
-const app = express()
+dotenv.config();
+const app = express();
 
 const Account = require('./route/account')
 const Cutri = require('./route/cutri')
@@ -29,9 +29,12 @@ app.use('/api/cutri',Cutri)
 app.use('/api/ungvien',Ungvien)
 app.use('/api/chuky',Chuky)
 
-const sslServer = https.createServer({
-    key : fs.readFileSync(path.join(__dirname,'cert','key.pem')),
-    cert : fs.readFileSync(path.join(__dirname,'cert','cert.pem')),
-},app)
+const sslServer = https.createServer(
+  {
+    key: fs.readFileSync(path.join(__dirname, "cert", "key.pem")),
+    cert: fs.readFileSync(path.join(__dirname, "cert", "cert.pem")),
+  },
+  app
+);
 
-sslServer.listen(3000,()=> console.log("Secure server on port 3000"))
+sslServer.listen(4000, () => console.log("Secure server on port 4000"));

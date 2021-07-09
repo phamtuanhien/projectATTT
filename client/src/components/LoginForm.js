@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
+import { withRouter } from "react-router-dom";
+import axios from "axios";
+import jwtDecode from "jwt-decode";
+import { UserContext } from "../contexts/userContext";
 
-function LoginForm() {
+function LoginForm(props) {
+  const { setUser } = useContext(UserContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(username, password);
+    axios
+      .post("https://localhost:4000/api/account/login", {
+        username: username,
+        password: password,
+      })
+      .then((res) => {
+        localStorage.setItem("token", res.data);
+        setUser(jwtDecode(res.data).data);
+        props.history.push("/");
+      });
     setUsername("");
     setPassword("");
   };
@@ -44,7 +59,7 @@ function LoginForm() {
             Mật khẩu:
           </label>
           <input
-            type="text"
+            type="password"
             name="password"
             id="password"
             value={password}
@@ -64,4 +79,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);

@@ -10,15 +10,27 @@ import Cutri from "./pages/Cutri";
 import Ungvien from "./pages/Ungvien";
 import Danhsachdangky from "./pages/Danhsachdangky";
 import Danhsachkiemtra from "./pages/Danhsachkiemtra";
+import Admin from "./pages/Admin";
+import jwtDecode from "jwt-decode";
+import { useContext } from "react";
+import { UserContext } from "./contexts/userContext";
+import { useEffect } from "react";
 
 function App() {
+  const { setUser } = useContext(UserContext);
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setUser(jwtDecode(localStorage.getItem("token")).data);
+    }
+  }, []);
+
   return (
     <div className="App">
       <Router>
         <Header />
         <Route path="/" exact component={HomePage} />
         <Route path="/stats" exact component={HomePage} />
-        <Route path="/login" exact component={Login} />
+        <Route path="/login" exact component={Login} />} />
         <Route path="/register" exact component={Register} />
         <Route path="/vote" exact component={Vote} />
         <Route path="/info" exact component={Info} />
@@ -26,6 +38,7 @@ function App() {
         <Route path="/ungvien" exact component={Ungvien} />
         <Route path="/danhsachdangky" exact component={Danhsachdangky} />
         <Route path="/danhsachkiemtra" exact component={Danhsachkiemtra} />
+        <Route path="/admin" exact component={Admin} />
       </Router>
     </div>
   );
