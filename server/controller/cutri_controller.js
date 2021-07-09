@@ -31,7 +31,7 @@ module.exports.getInfo = async function(req,res){
 }
 
 module.exports.getInfoByCMND = async function(req,res){
-    var cmnd = req.body.cmnd;
+    var cmnd = req.paramns.cmnd;
     Cutri.findOne({
         where : {
             cmnd : cmnd

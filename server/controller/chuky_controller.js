@@ -22,7 +22,7 @@ key.importKey({
 
 // lấy thông tin chữ ký hiển thị trên trang cử tri
 module.exports.getInfo = async function(req,res){
-    var cmnd = req.body.cmnd;
+    var cmnd = req.params.cmnd;
     Chuky.findOne(
         {
             attributes : ['cmnd','dinhdanh','chuky','tinhtrang'],
@@ -106,6 +106,7 @@ module.exports.ky = async function(req,res){
     .catch(err => res.status(500).send(err))
 }
 
+//verify
 module.exports.kiemtra = async function(req,res){
     const unblinded = req.body.chuky
     const dinhdanh = req.body.dinhdanh
@@ -117,6 +118,19 @@ module.exports.kiemtra = async function(req,res){
     if(result) res.status(200).send("True")
     else res.status(200).send("False")
 }
+
+// danh sách đăng ký chờ ký
+module.exports.dschoky = async function(req,res){
+    const ds = await Chuky.findAll({
+        attributes : ['bidanh','cmnd'],
+        where : {
+            tinhtrang : 'waiting'
+        }
+    })
+    .then(data => {res.status(200).send(data)})
+    .catch(err => {res.status(500).send(err)})
+}
+
 /*
 console.log(BlindSignature.verify2({
     unblinded : '456477225747887824399025770125294023211594939228775625611269664317314663346264913421738623376884661703374359582744677651241864766334983333731410136344482',

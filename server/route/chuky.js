@@ -3,9 +3,8 @@ const router = express.Router()
 const controller = require('../controller/chuky_controller')
 const middleware = require('../middleware/token_middleware')
 
-//router.get('/',middleware.verifyDH,controller.getAll)
-//router.get('/info/:id',middleware.verifyDH,controller.getInfo)
-router.get('/info',middleware.verifyCT,controller.getInfo)
+router.get('/info/:cmnd',middleware.verifyCT,controller.getInfo)
+router.get('/',middleware.verifyDK,controller.dschoky)
 
 router.post("/bidanh",middleware.verifyCT,controller.getBiDanh)
 router.post("/ky",middleware.verifyDK,controller.ky)
