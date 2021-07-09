@@ -30,7 +30,7 @@ function App() {
         <Header />
         <Route path="/" exact component={HomePage} />
         <Route path="/stats" exact component={HomePage} />
-        <Route path="/login" exact component={Login} />} />
+        <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />
         <Route path="/vote" exact component={Vote} />
         <Route path="/info" exact component={Info} />
@@ -43,5 +43,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
