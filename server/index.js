@@ -18,7 +18,7 @@ const Chuky = require('./route/chuky')
 const Phieubau = require('./route/phieubau')
 var upload = new multer();
 
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 app.use(cors())

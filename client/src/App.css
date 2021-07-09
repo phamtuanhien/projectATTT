@@ -173,7 +173,7 @@ body {
 }
 
 .form-control {
-  max-width: 500px;
+  max-width: 700px;
   margin: auto;
   margin-top: 20px;
 }
@@ -210,3 +210,8 @@ body {
   grid-template-columns: 1fr 1fr;
 }
 
+.flex {
+  display: flex;
+  justify-content: space-around;
+  justify-content: center;
+}

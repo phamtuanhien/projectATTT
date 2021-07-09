@@ -1,23 +1,30 @@
 import { Button } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CutriTable from "../components/CutriTable";
 import CutriForm from "../components/CutriForm";
-const danhsachcutrii = [
-  {
-    hoten: "pham tuan hien",
-    gioitinh: "nam",
-    ngaysinh: "01/01/2000",
-    quequan: "ninh binh",
-  },
-];
+import axios from "axios";
 
 function Cutri() {
   const [openCutri, setOpenCutri] = useState(false);
-  const [danhsachcutri, setdanhsachcutri] = useState(danhsachcutrii);
+  const [danhsachcutri, setdanhsachcutri] = useState([]);
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "https://localhost:4000/api/cutri",
+    }).then((res) => setdanhsachcutri(res.data));
+  }, []);
+
   const themCutri = (o) => {
-    const _danhsachcutri = [...danhsachcutri];
-    _danhsachcutri.push(o);
-    setdanhsachcutri(_danhsachcutri);
+    axios({
+      url: "https://localhost:4000/api/cutri/create",
+      method: "post",
+      data: o,
+    }).then(() => {
+      const _danhsachcutri = [...danhsachcutri];
+      _danhsachcutri.push(o);
+      setdanhsachcutri(_danhsachcutri);
+    });
   };
 
   return (

@@ -36,7 +36,7 @@ function UngvienTable({ data: rows }) {
               </TableCell>
               <TableCell>{row.gioitinh}</TableCell>
               <TableCell>{row.ngaysinh}</TableCell>
-              <TableCell>{row.quequan}</TableCell>
+              <TableCell>{row.diachi}</TableCell>
             </TableRow>
           ))}
         </TableBody>
