@@ -15,6 +15,7 @@ const Account = require('./route/account')
 const Cutri = require('./route/cutri')
 const Ungvien = require('./route/ungvien')
 const Chuky = require('./route/chuky')
+const Phieubau = require('./route/phieubau')
 var upload = new multer();
 
 app.use(cookieParser())
@@ -22,12 +23,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 app.use(cors())
 app.use(express.static('public'))
-app.use(upload.array())
 
+app.use('/api/ungvien',Ungvien)
+app.use(upload.array())
 app.use('/api/account',Account)
 app.use('/api/cutri',Cutri)
-app.use('/api/ungvien',Ungvien)
 app.use('/api/chuky',Chuky)
+app.use('/api/phieubau',Phieubau)
 
 const sslServer = https.createServer(
   {

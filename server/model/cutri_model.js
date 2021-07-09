@@ -13,7 +13,8 @@ const Cutri = sequelize.define('cutri',{
     },
     cmnd:{
         type : Sequelize.INTEGER,
-        allowNull : false
+        allowNull : false,
+        unique : true
     },
     ngaysinh:{
         type: Sequelize.DATE,
@@ -21,7 +22,8 @@ const Cutri = sequelize.define('cutri',{
     },
     sdt :{
         type : Sequelize.INTEGER,
-        allowNull : false
+        allowNull : false,
+        unique : true
     },
     chucvu : {
         type : Sequelize.STRING(45),

@@ -6,7 +6,7 @@ const NodeRSA = require('node-rsa')
 const BlindSignature = require('blind-signatures/rsablind2')
 
 // key
-const fixed_key = require('../key.json')
+const fixed_key = require('../keyDK_KT.json')
 const { response } = require('express')
 const key = new NodeRSA()
 key.importKey({
@@ -106,7 +106,7 @@ module.exports.ky = async function(req,res){
     .catch(err => res.status(500).send(err))
 }
 
-//verify
+//verify định danh, chữ ký
 module.exports.kiemtra = async function(req,res){
     const unblinded = req.body.chuky
     const dinhdanh = req.body.dinhdanh
@@ -119,7 +119,7 @@ module.exports.kiemtra = async function(req,res){
     else res.status(200).send("False")
 }
 
-// danh sách đăng ký chờ ký
+// danh sách đăng ký chờ ký hiển thị cho ban đăng ký
 module.exports.dschoky = async function(req,res){
     const ds = await Chuky.findAll({
         attributes : ['bidanh','cmnd'],
