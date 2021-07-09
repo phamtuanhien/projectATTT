@@ -59,11 +59,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 .title__text {
   font-size: 40px;
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 
 .stats {
@@ -209,3 +209,4 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+

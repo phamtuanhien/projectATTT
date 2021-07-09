@@ -1,13 +1,13 @@
 import React from "react";
 
-function CandidateCard() {
-  const ungvien = {
-    hoten: "Vũ Hoàng Phúc",
-    quequan: "Từ Sơn, Bắc Ninh",
-    ngaysinh: "15-10-2000",
-    chucvu: "Osin",
-    sophieu: "5/15",
-  };
+function CandidateCard({ ungvien }) {
+  // const ungvien = {
+  //   hoten: "Vũ Hoàng Phúc",
+  //   quequan: "Từ Sơn, Bắc Ninh",
+  //   ngaysinh: "15-10-2000",
+  //   chucvu: "Osin",
+  //   sophieu: "5/15",
+  // };
 
   return (
     <div className="card">
@@ -19,7 +19,7 @@ function CandidateCard() {
       </div>
       <div className="card__info">
         <p>Họ tên: {ungvien.hoten}</p>
-        <p>Quê Quán: {ungvien.quequan}</p>
+        <p>Quê Quán: {ungvien.diachi}</p>
         <p>Ngày Sinh: {ungvien.ngaysinh}</p>
         <p>Chức vụ: {ungvien.chucvu}</p>
       </div>

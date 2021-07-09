@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../contexts/userContext";
+
 function Header() {
+  const { user, setUser } = useContext(UserContext);
+
   return (
     <div className="header">
       <div className="header__left">
@@ -28,11 +32,32 @@ function Header() {
         <Link to="/danhsachkiemtra" className="link">
           Danh sách kiểm tra
         </Link>
+        <Link to="/admin" className="link">
+          Admin
+        </Link>
       </div>
       <div className="header__right">
-        <Link className="link" to="/login">
-          Đăng nhập
-        </Link>
+        {!user && (
+          <Link className="link" to="/login">
+            Đăng nhập
+          </Link>
+        )}
+        {user && (
+          <Link className="link" to="/info">
+            {user.username}
+          </Link>
+        )}
+        {user && (
+          <Link
+            className="link"
+            onClick={() => {
+              localStorage.removeItem("token");
+              setUser(null);
+            }}
+          >
+            Đăng xuất
+          </Link>
+        )}
       </div>
     </div>
   );
