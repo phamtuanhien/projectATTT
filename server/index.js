@@ -22,7 +22,7 @@ app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 app.use(cors())
-app.use(express.static('public'))
+app.use(express.static('./'))
 
 app.use('/api/ungvien',Ungvien)
 app.use(upload.array())
