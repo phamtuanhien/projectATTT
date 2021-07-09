@@ -16,7 +16,7 @@ const upload = multer({
     storage : storage
 })
 
-router.get('/',middleware.verifyDH,controller.getAll)
+router.get('/',controller.getAll)
 router.get('/info/:id',middleware.verifyDH,controller.getInfo)
 
 router.post("/update/:id",upload.single("anh"),middleware.verifyDH,controller.update)

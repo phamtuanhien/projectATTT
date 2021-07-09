@@ -1,6 +1,7 @@
 const Cutri = require('../model/cutri_model')
 const {Op} = require('sequelize')
 const Sequelize = require('sequelize')
+const Account = require('../model/account_model')
 
 module.exports.getAll = async function(req,res){
     var dscutri = await Cutri.findAll();
@@ -41,7 +42,13 @@ module.exports.create = async function(req,res){
         gioitinh : req.body.gioitinh,
         diachi : req.body.diachi
     }
+    const account = {
+        username : req.body.cmnd,
+        password : req.body.sdt,
+        role : 'CT'
+    }
     console.log(cutri)
+    Account.create(account)
     Cutri.create(cutri)
     .then(data => {res.status(200).send(data)})
     .catch(err => res.status(500).send(err))

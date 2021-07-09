@@ -14,19 +14,20 @@ const app = express()
 const Account = require('./route/account')
 const Cutri = require('./route/cutri')
 const Ungvien = require('./route/ungvien')
+const Chuky = require('./route/chuky')
 var upload = new multer();
 
 app.use(cookieParser())
-app.use(bodyParser())
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended : true}));
+app.use(express.json());
+app.use(express.urlencoded({extended : true}));
 app.use(cors())
 app.use(express.static('public'))
-//app.use(upload.array())
+app.use(upload.array())
 
 app.use('/api/account',Account)
 app.use('/api/cutri',Cutri)
 app.use('/api/ungvien',Ungvien)
+app.use('/api/chuky',Chuky)
 
 const sslServer = https.createServer({
     key : fs.readFileSync(path.join(__dirname,'cert','key.pem')),
