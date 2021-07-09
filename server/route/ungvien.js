@@ -17,9 +17,9 @@ const upload = multer({
 })
 
 router.get('/',controller.getAll)
-router.get('/info/:id',middleware.verifyDH,controller.getInfo)
+router.get('/info/:id',controller.getInfo)
 
 router.post("/update/:id",upload.single("anh"),middleware.verifyDH,controller.update)
-router.post("/delete/:id",controller.delete)
+router.post("/delete/:id",middleware.verifyDH,controller.delete)
 router.post('/create',upload.single("anh"),middleware.verifyDH,controller.create)
 module.exports = router
