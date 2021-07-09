@@ -30,6 +30,17 @@ module.exports.getInfo = async function(req,res){
     .catch(error => {res.status(500).send(error)})
 }
 
+module.exports.getInfoByCMND = async function(req,res){
+    var cmnd = req.body.cmnd;
+    Cutri.findOne({
+        where : {
+            cmnd : cmnd
+        }
+    })
+    .then(data => {res.status(200).send(data)})
+    .catch(error => {res.status(500).send(error)})
+}
+
 module.exports.create = async function(req,res){
     //console.log(req.body.hoten)
     const cutri = {

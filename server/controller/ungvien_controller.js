@@ -19,15 +19,16 @@ module.exports.delete = async function(req,res){
 }
 
 module.exports.getInfo = async function(req,res){
-    var cmnd = req.body.cmnd;
+    var ungvienID = req.params.id;
     Ungvien.findOne({
         where : {
-            cmnd : cmnd
+            ungvienID : ungvienID
         }
     })
     .then(data => {res.status(200).send(data)})
     .catch(error => {res.status(500).send(error)})
 }
+
 
 module.exports.create = async function(req,res){
     console.log(req.body.hoten)
