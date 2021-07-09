@@ -52,6 +52,7 @@ function Header() {
             className="link"
             onClick={() => {
               localStorage.removeItem("token");
+              localStorage.removeItem("user");
               setUser(null);
             }}
           >

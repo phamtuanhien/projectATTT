@@ -6,18 +6,17 @@ import { useState } from "react";
 import { UserContext } from "../contexts/userContext";
 
 function InfoCard() {
-  const { user } = useContext(UserContext);
+  const user = JSON.parse(localStorage.getItem("user"));
   const [info, setInfo] = useState();
 
   useEffect(() => {
-    axios({
-      method: "get",
-      url: "https://localhost:4000/api/cutri/infocmnd",
-      header: { token: localStorage.getItem("token") },
-      data: {
-        cmnd: "125923632",
-      },
-    }).then((res) => console.log(res.data));
+    console.log(user);
+    user &&
+      axios({
+        method: "get",
+        url: `https://localhost:4000/api/cutri/infocmnd/${user.username}`,
+        header: { token: localStorage.getItem("token") },
+      }).then((res) => setInfo(res.data));
   }, []);
 
   return (
@@ -31,15 +30,17 @@ function InfoCard() {
         <p>Giới tính</p>
         <p>Ngày sinh</p>
       </div>
-      {/* <div className="info__right">
-        <p>{info.hoten}</p>
-        <p>{info.cmnd}</p>
-        <p>{info.sdt}</p>
-        <p>{info.diachi}</p>
-        <p>{info.chucvu}</p>
-        <p>{info.gioitinh}</p>
-        <p>{info.ngaysinh}</p>
-      </div> */}
+      {info && (
+        <div className="info__right">
+          <p>{info.hoten}</p>
+          <p>{info.cmnd}</p>
+          <p>{info.sdt}</p>
+          <p>{info.diachi}</p>
+          <p>{info.chucvu}</p>
+          <p>{info.gioitinh}</p>
+          <p>{info.ngaysinh}</p>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import axios from "axios";
 
-function TaotaikhoanForm() {
+function TaotaikhoanForm({ addAccount }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [rule, setRule] = useState("");
+  const [role, setRole] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password, rule);
+    axios({
+      method: "post",
+      url: "https://localhost:4000/api/account/create",
+      headers: {
+        token: localStorage.getItem("token"),
+      },
+      data: {
+        username: username,
+        password: password,
+        role: role,
+      },
+    }).then(() => {
+      addAccount({ username: username, password: password, role: role });
+    });
   };
 
   const handleOnChange = (e, type) => {
@@ -16,8 +30,8 @@ function TaotaikhoanForm() {
       setUsername(e.target.value);
     } else if (type === "password") {
       setPassword(e.target.value);
-    } else if (type === "rule") {
-      setRule(e.target.value);
+    } else if (type === "role") {
+      setRole(e.target.value);
     }
   };
 
@@ -55,10 +69,10 @@ function TaotaikhoanForm() {
         variant="outlined"
         margin="normal"
         fullWidth
-        id="rule"
-        value={rule}
+        id="role"
+        value={role}
         label="Vai trò"
-        name="rule"
+        name="role"
         autoComplete="off"
         required
         onChange={(e) => {

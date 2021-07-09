@@ -34,12 +34,15 @@ module.exports.getInfo = async function (req, res) {
     });
 };
 
-module.exports.getInfoByCMND = async function(req,res){
-    var cmnd = req.params.cmnd;
-    Cutri.findOne({
-        where : {
-            cmnd : cmnd
-        }
+module.exports.getInfoByCMND = async function (req, res) {
+  var cmnd = req.params.cmnd;
+  Cutri.findOne({
+    where: {
+      cmnd: cmnd,
+    },
+  })
+    .then((data) => {
+      res.status(200).send(data);
     })
     .catch((error) => {
       res.status(500).send(error);

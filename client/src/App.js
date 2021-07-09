@@ -20,7 +20,9 @@ function App() {
   const { setUser } = useContext(UserContext);
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      setUser(jwtDecode(localStorage.getItem("token")).data);
+      const user = jwtDecode(localStorage.getItem("token")).data;
+      setUser(user);
+      localStorage.setItem("user", JSON.stringify(user));
     }
   }, []);
 
