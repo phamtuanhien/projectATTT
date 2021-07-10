@@ -24,7 +24,7 @@ module.exports.getInfo = async function(req,res){
     var cmnd = req.params.cmnd
     var phieubau = await Phieubau_encode.findOne(
         {
-            attributes : ['cmnd','chuky','dinhdanh','status'],
+            attributes : ['cmnd','chuky','dinhdanh','tinhtrang'],
             where : {
                 cmnd : cmnd
             }
@@ -33,7 +33,7 @@ module.exports.getInfo = async function(req,res){
     if (!phieubau){
         phieubau = await Phieubau_decode.findOne(
             {
-                attributes : ['cmnd','chuky','dinhdanh','status','ungvienID'],
+                attributes : ['cmnd','chuky','dinhdanh','tinhtrang','ungvienID'],
                 where : {
                     cmnd : cmnd
                 }
