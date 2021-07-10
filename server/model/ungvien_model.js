@@ -21,7 +21,7 @@ const Ungvien = sequelize.define('ungvien',{
         allowNull : false
     },
     sdt :{
-        type : Sequelize.INTEGER,
+        type : Sequelize.STRING(11),
         allowNull : false,
         unique : true
     },
