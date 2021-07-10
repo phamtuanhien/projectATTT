@@ -60,7 +60,7 @@ module.exports.bophieu = async function(req,res){
     if(check) return res.status(500).send("Đã trong hòm phiếu")
     const phieubau = {
         cmnd : req.body.cmnd,
-        chuky : req.body.cmnd,
+        chuky : req.body.chuky,
         dinhdanh : req.body.dinhdanh,
         tinhtrang : 'waiting',
         content : key.encrypt(req.body.ungvienID,'base64')
