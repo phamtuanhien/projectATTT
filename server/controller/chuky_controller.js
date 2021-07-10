@@ -25,7 +25,6 @@ module.exports.getInfo = async function(req,res){
     var cmnd = req.params.cmnd;
     Chuky.findOne(
         {
-            attributes : ['cmnd','dinhdanh','chuky','tinhtrang'],
             where : {
                 cmnd : cmnd
             }

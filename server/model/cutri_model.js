@@ -21,7 +21,7 @@ const Cutri = sequelize.define('cutri',{
         allowNull : false
     },
     sdt :{
-        type : Sequelize.INTEGER,
+        type : Sequelize.STRING(45),
         allowNull : false,
         unique : true
     },
