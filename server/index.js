@@ -22,11 +22,11 @@ app.use(express.urlencoded({extended : true}));
 app.use(cors())
 app.use('/image',express.static('image'))
 
-app.use('/api/ungvien',Ungvien)
+app.use('/api/ungvien',Ungvien) //checked
 expressBusboy.extend(app);
-app.use('/api/account',Account)
-app.use('/api/cutri',Cutri)
-app.use('/api/chuky',Chuky)
+app.use('/api/account',Account) // checked
+app.use('/api/cutri',Cutri)//checked
+app.use('/api/chuky',Chuky) // checked
 app.use('/api/phieubau',Phieubau)
 
 const sslServer = https.createServer(

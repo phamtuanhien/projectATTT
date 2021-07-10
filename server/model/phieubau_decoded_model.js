@@ -10,7 +10,7 @@ const PhieubauDecode = sequelize.define('phieubau_decoded',{
         type : Sequelize.STRING(255),
         allowNull : true
     },
-    unvienID:{
+    ungvienID:{
         type: Sequelize.INTEGER,
         allowNull : false
     },

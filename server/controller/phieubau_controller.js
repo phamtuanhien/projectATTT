@@ -52,7 +52,7 @@ module.exports.bophieu = async function(req,res){
         }
     })
     if(check) return res.status(500).send("Đã bỏ phiếu và đang chờ kiểm tra!")
-    check = await Phieubau_decode.fingOne({
+    check = await Phieubau_decode.findOne({
         where : {
             cmnd : req.body.cmnd
         }
@@ -62,7 +62,7 @@ module.exports.bophieu = async function(req,res){
         cmnd : req.body.cmnd,
         chuky : req.body.cmnd,
         dinhdanh : req.body.dinhdanh,
-        status : 'waiting',
+        tinhtrang : 'waiting',
         content : key.encrypt(req.body.ungvienID,'base64')
     }
     Phieubau_encode.create(phieubau)
