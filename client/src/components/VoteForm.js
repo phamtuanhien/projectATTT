@@ -12,7 +12,7 @@ function VoteForm({ closeVote }) {
   const [chuky, setChuky] = useState("");
   const [ungvienID, setUngvienID] = useState();
   const [danhsachungvien, setDanhsachungvien] = useState([]);
-  const [select, setSelect] = useState();
+  const [select, setSelect] = useState(null);
   useEffect(() => {
     axios({
       method: "get",
@@ -31,11 +31,12 @@ function VoteForm({ closeVote }) {
   const handleOnClick = (ungvienID, index) => {
     setUngvienID(ungvienID);
     setSelect(index);
+    console.log(ungvienID);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (select) {
+    if (select != null) {
       axios({
         method: "post",
         url: "https://localhost:4000/api/phieubau/bophieu",
@@ -56,7 +57,7 @@ function VoteForm({ closeVote }) {
   };
 
   return (
-    <div class="hehe">
+    <div className="hehe">
       <form onSubmit={handleSubmit}>
         <FormControl style={{ width: "200px" }} component="fieldset">
           <TextField
