@@ -86,6 +86,11 @@ module.exports.themvaohomphieu = async function(req,res){
         tinhtrang : "done",
         ungvienID : key.decrypt(req.body.content,'utf8')
     }
+    Phieubau_encode.destroy({
+        where : {
+            cmnd : req.body.cmnd
+        }
+    })
     Phieubau_decode.create(phieubau)
     .then(data => {res.status(200).send("OK")})
     .catch(err => {res.status(500).send(err)})
