@@ -13,37 +13,27 @@ const useStyles = makeStyles({
   },
 });
 
-function DanhsachkiemtraTable({ data: rows, setSelect, select }) {
+function DanhsachkiemtraTable({ accountList }) {
   const classes = useStyles();
-  const handleOnClick = (e, k) => {
-    setSelect(k);
-    console.log(k);
-  };
 
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="center">Chữ ký</TableCell>
-            <TableCell align="center">Định danh</TableCell>
+            <TableCell align="center">Tên tài khoản</TableCell>
+            <TableCell align="center">Mật khẩu</TableCell>
+            <TableCell align="center">Vai trò</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.chuky}
-              onClick={(e) => {
-                handleOnClick(e, row);
-              }}
-              className={
-                `table-row` + (row.chuky === select.chuky ? " highlight" : "")
-              }
-            >
+          {accountList.map((row, index) => (
+            <TableRow key={index}>
               <TableCell component="th" scope="row">
-                {row.chuky}
+                {row.username}
               </TableCell>
-              <TableCell>{row.dinhdanh}</TableCell>
+              <TableCell>{row.password}</TableCell>
+              <TableCell>{row.role}</TableCell>
             </TableRow>
           ))}
         </TableBody>

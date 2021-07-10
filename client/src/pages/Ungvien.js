@@ -1,23 +1,30 @@
 import { Button } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UngvienTable from "../components/UngvienTable";
-import UngvienForm from "../components/CutriForm";
-const danhsachungvienn = [
-  {
-    hoten: "pham tuan hien",
-    gioitinh: "nam",
-    ngaysinh: "01/01/2000",
-    quequan: "ninh binh",
-  },
-];
+import UngvienForm from "../components/UngvienForm";
+import axios from "axios";
 
 function Cutri() {
   const [openUngvien, setOpenUngvien] = useState(false);
-  const [danhsachungvien, setdanhsachungvien] = useState(danhsachungvienn);
+  const [danhsachungvien, setDanhsachungvien] = useState([]);
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "https://localhost:4000/api/ungvien",
+    }).then((res) => setDanhsachungvien(res.data));
+  }, [openUngvien]);
+
   const themUngvien = (o) => {
-    const _danhsachungvien = [...danhsachungvien];
-    _danhsachungvien.push(o);
-    setdanhsachungvien(_danhsachungvien);
+    axios({
+      url: "https://localhost:4000/api/ungvien/create",
+      method: "post",
+      data: 0,
+    }).then(() => {
+      const _danhsachungvien = [...danhsachungvien];
+      _danhsachungvien.push(o);
+      setDanhsachungvien(_danhsachungvien);
+    });
   };
 
   return (

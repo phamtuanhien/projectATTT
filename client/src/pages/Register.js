@@ -1,53 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import RegisterTable from "../components/RegisterTable";
 import Button from "@material-ui/core/Button";
 import { useState } from "react";
 import RegisterForm from "../components/RegisterForm";
 import AuthForm from "../components/AuthForm";
-function createData(
-  cmnd,
-  dinhdanh,
-  bidanh,
-  songaunhien,
-  tinhtrang,
-  chukybidanh,
-  chukydinhdanh
-) {
-  return {
-    cmnd,
-    dinhdanh,
-    bidanh,
-    songaunhien,
-    tinhtrang,
-    chukybidanh,
-    chukydinhdanh,
-  };
-}
-const rowss = [
-  createData(
-    1259223444,
-    "Vũ Hoàng Phúc",
-    0x3f4e12346a,
-    15,
-    "Đang chờ",
-    0x1231231312,
-    0x343443443
-  ),
-  createData(
-    12592234345,
-    "Vũ Hoàng Phúc",
-    0x3f4e12346a,
-    15,
-    "Đang chờ",
-    0x1231231312,
-    0x343443443
-  ),
-];
+import axios from "axios";
 
 function Register() {
   const [openRegis, setOpenRegis] = useState(false);
   const [openAuth, setOpenAuth] = useState(false);
-  const [rows, setRows] = useState(rowss);
+  const [text, setText] = useState("");
+  const [rows, setRows] = useState();
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `https://localhost:4000/api/chuky/info/${
+        JSON.parse(localStorage.getItem("user")).username
+      }`,
+    }).then((res) => {
+      console.log(res.data);
+      setRows([res.data]);
+    });
+  }, [openRegis]);
 
   const handleClickRegis = () => {
     if (openRegis) {
@@ -57,6 +32,7 @@ function Register() {
         setOpenAuth(!openAuth);
       }
       setOpenRegis(!openRegis);
+      setText("");
     }
   };
   const handleClickAuth = () => {
@@ -70,9 +46,26 @@ function Register() {
     }
   };
   const newRegis = (o) => {
-    const v_rows = [...rows];
-    v_rows.push(o);
-    setRows(v_rows);
+    axios({
+      method: "post",
+      url: "https://localhost:4000/api/chuky/dangky",
+      data: {
+        cmnd: o.cmnd,
+        bidanh: o.bidanh,
+        dinhdanh: o.dinhdanh,
+        r: o.songaunhien,
+      },
+    })
+      .then((res) => {
+        console.log("dang ky thanh cong");
+        setText("");
+        setOpenRegis(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setText("Bạn đã xin cấp chữ ký trước đó");
+        setOpenRegis(false);
+      });
   };
 
   return (
@@ -97,6 +90,9 @@ function Register() {
           Xác thực chũ ký
         </Button>
       </div>
+      {text && (
+        <div style={{ fontSize: "24px", marginTop: "20px" }}>{text}</div>
+      )}
       {openRegis && (
         <RegisterForm closeRegis={handleClickRegis} newRegis={newRegis} />
       )}

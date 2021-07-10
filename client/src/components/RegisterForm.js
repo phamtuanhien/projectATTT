@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import axios from "axios";
 function RegisterForm({ closeRegis, newRegis }) {
   const [cmnd, setCmnd] = useState("");
   const [dinhdanh, setDinhdanh] = useState("");
@@ -11,41 +12,46 @@ function RegisterForm({ closeRegis, newRegis }) {
     e.preventDefault();
     console.log(cmnd, dinhdanh, songaunhien, bidanh);
     const o = {
-      cmnd: cmnd,
+      cmnd: JSON.parse(localStorage.getItem("user")).username,
       dinhdanh: dinhdanh,
       songaunhien: songaunhien,
       bidanh: bidanh,
     };
     newRegis(o);
-    closeRegis();
   };
   const handleOnChange = (e, type) => {
-    if (type === "cmnd") {
-      setCmnd(e.target.value);
-    } else if (type === "dinhdanh") {
+    if (type === "dinhdanh") {
       setDinhdanh(e.target.value);
-    } else if (type === "songaunhien") {
-      setSongaunhien(e.target.value);
-    } else if (type === "bidanh") {
-      setBidanh(e.target.value);
+    }
+  };
+
+  const taobidanh = () => {
+    if (dinhdanh != "") {
+      axios({
+        method: "post",
+        url: "https://localhost:4000/api/chuky/bidanh",
+        data: { dinhdanh: dinhdanh },
+      }).then((res) => {
+        console.log(res.data);
+        setSongaunhien(res.data.r);
+        setBidanh(res.data.blinded);
+      });
     }
   };
 
   return (
     <form className="form-control" onSubmit={handleSubmit}>
       <TextField
+        disabled
         variant="outlined"
         margin="normal"
         fullWidth
         id="cmnd"
-        value={cmnd}
+        value={JSON.parse(localStorage.getItem("user")).username}
         label="Chứng minh nhân dân"
         name="cmnd"
         required
         autoComplete="off"
-        onChange={(e) => {
-          handleOnChange(e, e.target.name);
-        }}
       />
       <TextField
         variant="outlined"
@@ -61,7 +67,19 @@ function RegisterForm({ closeRegis, newRegis }) {
           handleOnChange(e, e.target.name);
         }}
       />
+      <Button
+        style={{ marginTop: "15px", marginBottom: "10px" }}
+        fullWidth
+        variant="contained"
+        color="primary"
+        className="submit-register"
+        autoComplete="off"
+        onClick={taobidanh}
+      >
+        Tạo bí danh
+      </Button>
       <TextField
+        disabled
         variant="outlined"
         margin="normal"
         fullWidth
@@ -70,24 +88,17 @@ function RegisterForm({ closeRegis, newRegis }) {
         label="Số ngẫu nhiên"
         name="songaunhien"
         autoComplete="off"
-        required
-        onChange={(e) => {
-          handleOnChange(e, e.target.name);
-        }}
       />
       <TextField
+        disabled
         variant="outlined"
         margin="normal"
         fullWidth
         id="bidanh"
         value={bidanh}
         label="Bí danh"
-        required
         name="bidanh"
         autoComplete="off"
-        onChange={(e) => {
-          handleOnChange(e, e.target.name);
-        }}
       />
       <Button
         type="submit"

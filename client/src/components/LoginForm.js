@@ -20,6 +20,7 @@ function LoginForm(props) {
       })
       .then((res) => {
         localStorage.setItem("token", res.data);
+        localStorage.setItem("user", JSON.stringify(jwtDecode(res.data).data));
         setUser(jwtDecode(res.data).data);
         props.history.push("/");
       });

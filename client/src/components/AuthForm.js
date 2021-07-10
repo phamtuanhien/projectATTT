@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 function AuthForm({ closeAuth }) {
-  const [vanban, setVanban] = useState("");
+  const [dinhdanh, setDinhdanh] = useState("");
   const [chuky, setChuky] = useState("");
 
   const handleSubmit = (e) => {
@@ -10,8 +10,8 @@ function AuthForm({ closeAuth }) {
   };
 
   const handleOnChange = (e, type) => {
-    if (type === "vanban") {
-      setVanban(e.target.value);
+    if (type === "dinhdanh") {
+      setDinhdanh(e.target.value);
     } else if (type === "chuky") {
       setChuky(e.target.value);
     }
@@ -23,10 +23,10 @@ function AuthForm({ closeAuth }) {
         variant="outlined"
         margin="normal"
         fullWidth
-        id="vanban"
-        value={vanban}
-        label="Văn bản"
-        name="vanban"
+        id="dinhdanh"
+        value={dinhdanh}
+        label="Định danh"
+        name="dinhdanh"
         required
         autoComplete="off"
         onChange={(e) => {
@@ -39,7 +39,7 @@ function AuthForm({ closeAuth }) {
         fullWidth
         id="chuky"
         value={chuky}
-        label="Chữ ký trên văn bản"
+        label="Chữ ký trên định danh"
         name="chuky"
         autoComplete="off"
         required

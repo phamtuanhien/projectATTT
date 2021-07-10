@@ -12,7 +12,7 @@ function Stats() {
         token: localStorage.getItem("token"),
       },
     }).then((res) => setDanhsachungvien(res.data));
-  });
+  }, []);
 
   return (
     <div>

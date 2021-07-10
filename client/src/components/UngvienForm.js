@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import axios from "axios";
 function CutriForm({ closeCutri, themCutri }) {
   const [hoten, setHoten] = useState("");
   const [gioitinh, setGioitinh] = useState("");
@@ -10,21 +11,42 @@ function CutriForm({ closeCutri, themCutri }) {
   const [sdt, setSdt] = useState("");
   const [chucvu, setChucvu] = useState("");
   const [noilamviec, setNoilamviec] = useState("");
+  const [uploadfile, setUploadfile] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const o = {
-      hoten: hoten,
-      gioitinh: gioitinh,
-      ngaysinh: ngaysinh,
-      diachi: diachi,
-      cmnd: cmnd,
-      sdt: sdt,
-      chucvu: chucvu,
-      noilamviec: noilamviec,
+    // const o = {
+    //   hoten: hoten,
+    //   gioitinh: gioitinh,
+    //   ngaysinh: ngaysinh,
+    //   diachi: diachi,
+    //   cmnd: cmnd,
+    //   sdt: sdt,
+    //   chucvu: chucvu,
+    //   noilamviec: noilamviec,
+    // };
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
     };
-    themCutri(o);
-    closeCutri();
+
+    const formData = new FormData();
+
+    formData.append("anh", uploadfile);
+    formData.append("hoten", hoten);
+    formData.append("gioitinh", gioitinh);
+    formData.append("ngaysinh", ngaysinh);
+    formData.append("diachi", diachi);
+    formData.append("cmnd", cmnd);
+    formData.append("sdt", sdt);
+    formData.append("chucvu", chucvu);
+    formData.append("noilamviec", noilamviec);
+    axios
+      .post("https://localhost:4000/api/ungvien/create", formData, config)
+      .then(() => {
+        closeCutri();
+      });
   };
   const handleOnChange = (e, type) => {
     if (type === "hoten") {
@@ -43,11 +65,17 @@ function CutriForm({ closeCutri, themCutri }) {
       setChucvu(e.target.value);
     } else if (type === "noilamviec") {
       setNoilamviec(e.target.value);
+    } else if (type === "anh") {
+      setUploadfile(e.target.value);
     }
   };
 
   return (
-    <form className="form-control" onSubmit={handleSubmit}>
+    <form
+      encType="multipart/form-data"
+      className="form-control"
+      onSubmit={handleSubmit}
+    >
       <div className="flex">
         <div style={{ marginRight: "10px" }}>
           {" "}
@@ -167,6 +195,17 @@ function CutriForm({ closeCutri, themCutri }) {
           />
         </div>
       </div>
+
+      <input
+        style={{ marginBottom: "10px" }}
+        type="file"
+        name="anh"
+        id="anh"
+        onChange={(e) => {
+          const files = e.target.files;
+          setUploadfile(files[0]);
+        }}
+      />
       <Button
         type="submit"
         fullWidth

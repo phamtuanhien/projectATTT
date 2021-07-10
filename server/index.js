@@ -16,7 +16,7 @@ const Ungvien = require('./route/ungvien')
 const Chuky = require('./route/chuky')
 const Phieubau = require('./route/phieubau')
 
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 app.use(cors())
