@@ -43,7 +43,7 @@ export default function RegisterTable({ data: rows }) {
                 <TableCell>{row.songaunhien}</TableCell>
                 <TableCell>{row.tinhtrang}</TableCell>
                 {/* <TableCell>{row.chukybidanh}</TableCell> */}
-                <TableCell>{row.chukydinhdanh}</TableCell>
+                <TableCell>{row.chuky}</TableCell>
               </TableRow>
             ))}
         </TableBody>

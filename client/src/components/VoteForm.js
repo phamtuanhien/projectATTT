@@ -1,34 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import { Button } from "@material-ui/core";
-
-const data = [
-  {
-    id: "1",
-    hoten: "Vũ Hoàng Phúc",
-    quequan: "Từ Sơn, Bắc Ninh",
-    ngaysinh: "15-10-2000",
-    chucvu: "Osin",
-    sophieu: "5/15",
-  },
-  {
-    id: "2",
-    hoten: "Phạm Tuấn Hiên",
-    quequan: "Từ Sơn, Bắc Ninh",
-    ngaysinh: "15-10-2000",
-    chucvu: "Osin",
-    sophieu: "5/15",
-  },
-];
+import axios from "axios";
 
 function VoteForm({ closeVote }) {
   const [dinhdanh, setDinhdanh] = useState("");
   const [chuky, setChuky] = useState("");
-  const [value, setValue] = useState(data[0].id);
+  const [ungvienID, setUngvienID] = useState();
+  const [danhsachungvien, setDanhsachungvien] = useState([]);
+  const [select, setSelect] = useState();
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "https://localhost:4000/api/ungvien",
+    }).then((res) => setDanhsachungvien(res.data));
+  }, []);
 
   const handleOnChange = (e, type) => {
     if (type === "dinhdanh") {
@@ -38,20 +28,49 @@ function VoteForm({ closeVote }) {
     }
   };
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
+  const handleOnClick = (ungvienID, index) => {
+    setUngvienID(ungvienID);
+    setSelect(index);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(value, dinhdanh, chuky);
-    closeVote();
+    if (select) {
+      axios({
+        method: "post",
+        url: "https://localhost:4000/api/phieubau/bophieu",
+        data: {
+          cmnd: JSON.parse(localStorage.getItem("user")).username,
+          chuky: chuky,
+          dinhdanh: dinhdanh,
+          ungvienID: ungvienID,
+        },
+      })
+        .then((res) => {
+          closeVote();
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    }
   };
 
   return (
-    <div className="center">
+    <div class="hehe">
       <form onSubmit={handleSubmit}>
-        <FormControl component="fieldset">
+        <FormControl style={{ width: "200px" }} component="fieldset">
+          <TextField
+            disabled
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            id="cmnd"
+            value={JSON.parse(localStorage.getItem("user")).username}
+            label="Chứng minh nhân dân"
+            name="cmnd"
+            autoComplete="off"
+            required
+          />
           <TextField
             variant="outlined"
             margin="normal"
@@ -80,23 +99,6 @@ function VoteForm({ closeVote }) {
               handleOnChange(e, e.target.name);
             }}
           />
-          <RadioGroup
-            aria-label="votee"
-            name="votee"
-            value={value}
-            onChange={handleChange}
-          >
-            {data.map((v) => {
-              return (
-                <FormControlLabel
-                  value={v.id}
-                  key={v.id}
-                  control={<Radio />}
-                  label={v.hoten}
-                />
-              );
-            })}
-          </RadioGroup>
           <Button
             type="submit"
             fullWidth
@@ -109,6 +111,36 @@ function VoteForm({ closeVote }) {
           </Button>
         </FormControl>
       </form>
+      <div className="danhsachungvien">
+        {danhsachungvien.map((ungvien, index) => (
+          <div
+            key={index}
+            className={"ungvien " + (index == select ? "active" : "")}
+            onClick={(e) => {
+              handleOnClick(ungvien.ungvienID, index);
+            }}
+          >
+            <div className="avatar">
+              <img src={ungvien.anh} alt="avatar" />
+            </div>
+            <div className="flex" style={{ flexGrow: "1" }}>
+              <div style={{ marginLeft: "20px", width: "270px" }}>
+                <p>Họ tên: {ungvien.hoten}</p>
+                <p>Quê Quán: {ungvien.diachi}</p>
+              </div>
+              <div style={{ marginLeft: "20px" }}>
+                <p>Ngày Sinh: {ungvien.ngaysinh}</p>
+                <p>Chức vụ: {ungvien.chucvu}</p>
+              </div>
+            </div>
+            <div className="sophieu-wrap">
+              <div className="sophieu">
+                <div className="sophieuu">{ungvien.sophieu}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
