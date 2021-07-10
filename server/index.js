@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const multer = require("multer");
+const expressBusboy = require('express-busboy')
 const https = require("https");
 const path = require("path");
 const fs = require("fs");
@@ -10,25 +10,23 @@ const cookieParser = require("cookie-parser");
 
 dotenv.config();
 const app = express();
-
 const Account = require('./route/account')
 const Cutri = require('./route/cutri')
 const Ungvien = require('./route/ungvien')
 const Chuky = require('./route/chuky')
 const Phieubau = require('./route/phieubau')
-var upload = new multer();
 
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 app.use(cors())
-app.use(express.static('./'))
+app.use('/image',express.static('image'))
 
-app.use('/api/ungvien',Ungvien)
-app.use(upload.array())
-app.use('/api/account',Account)
-app.use('/api/cutri',Cutri)
-app.use('/api/chuky',Chuky)
+app.use('/api/ungvien',Ungvien) //checked
+expressBusboy.extend(app);
+app.use('/api/account',Account) // checked
+app.use('/api/cutri',Cutri)//checked
+app.use('/api/chuky',Chuky) // checked
 app.use('/api/phieubau',Phieubau)
 
 const sslServer = https.createServer(

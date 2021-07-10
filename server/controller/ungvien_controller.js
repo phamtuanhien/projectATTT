@@ -35,9 +35,9 @@ module.exports.getInfo = async function (req, res) {
 
 
 module.exports.create = async function(req,res){
-    console.log(req.body.hoten)
+    console.log(req.body)
     var item = req.file
-    let img =  `https://localhost:3000/${item.path.split("/").slice(1).join("/")}`
+    let img =  `https://localhost:4000/${item.path.split("/").slice(1).join("/")}`
 
   const ungvien = {
     hoten: req.body.hoten,
