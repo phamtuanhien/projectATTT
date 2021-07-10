@@ -1,11 +1,21 @@
 import { Button } from "@material-ui/core";
+import axios from "axios";
 import React, { useState } from "react";
 
 function Kiemtracapchuky({ data, setOpen }) {
-  const { cmnd, bidanh, trangthai } = data;
-  const [chuky, setChuKy] = useState("");
-  const verify = () => {
-    setChuKy("adasd");
+  const { cmnd, bidanh } = data;
+  const capChuky = () => {
+    axios({
+      method: "post",
+      url: "https:/localhost:4000/api/chuky/ky",
+      data: {
+        cmnd: cmnd,
+        bidanh: bidanh,
+      },
+    }).then((res) => {
+      console.log("Ban kiem tra cap chu ky thanh cong");
+      setOpen(true);
+    });
   };
   const done = () => {
     setOpen(true);
@@ -24,30 +34,27 @@ function Kiemtracapchuky({ data, setOpen }) {
       >
         Quay lại
       </Button>
-      <div className="grid" style={{ marginTop: "20px" }}>
-        <p>Bí danh: {bidanh}</p>
-        <p>CMND: {cmnd}</p>
-        <p>Trạng thái: {trangthai}</p>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <Button
-            variant="contained"
-            color="primary"
-            className="nice-button"
-            onClick={verify}
-          >
-            Cấp chữ ký
-          </Button>
-          <p style={{ marginLeft: "10px" }}>{chuky}</p>
-        </div>
+      <p>Bí danh: {bidanh}</p>
+      <p>CMND: {cmnd}</p>
+      <p>Trạng thái: Đang chờ cấp</p>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          className="nice-button"
+          onClick={capChuky}
+        >
+          Cấp chữ ký
+        </Button>
       </div>
-      <Button
+      {/* <Button
         variant="contained"
         color="primary"
         className="nice-button"
         onClick={done}
       >
         Done
-      </Button>
+      </Button> */}
     </div>
   );
 }

@@ -21,32 +21,39 @@ function DanhsachdangkyTable({ data: rows, setSelect, setOpen }) {
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="center">CMND</TableCell>
-            <TableCell align="center">Bí danh</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.cmnd}
-              onClick={(e) => {
-                handleOnClick(e, row);
-              }}
-              className="table-row"
-            >
-              <TableCell component="th" scope="row">
-                {row.cmnd}
-              </TableCell>
-              <TableCell>{row.bidanh}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div>
+      {rows.length != 0 && (
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">CMND</TableCell>
+                <TableCell align="center">Bí danh</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow
+                  key={row.cmnd}
+                  onClick={(e) => {
+                    handleOnClick(e, row);
+                  }}
+                  className="table-row"
+                >
+                  <TableCell component="th" scope="row">
+                    {row.cmnd}
+                  </TableCell>
+                  <TableCell>{row.bidanh}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+      {rows.length == 0 && (
+        <p style={{ fontSize: "20px" }}>Không có chữ ký cần cấp</p>
+      )}
+    </div>
   );
 }
 

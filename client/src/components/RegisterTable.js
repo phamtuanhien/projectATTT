@@ -22,29 +22,30 @@ export default function RegisterTable({ data: rows }) {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>CMND</TableCell>
-            <TableCell>Định danh</TableCell>
-            <TableCell>Bí danh</TableCell>
-            <TableCell>Số ngẫu nhiên</TableCell>
-            <TableCell>Tình trạng</TableCell>
-            <TableCell>Chữ ký trên bí danh</TableCell>
+            <TableCell align="center">CMND</TableCell>
+            <TableCell align="center">Định danh</TableCell>
+            <TableCell align="center">Bí danh</TableCell>
+            <TableCell align="center">Số ngẫu nhiên</TableCell>
+            <TableCell align="center">Tình trạng</TableCell>
+            {/* <TableCell>Chữ ký trên bí danh</TableCell> */}
             <TableCell>Chữ ký trên định danh</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.cmnd}>
-              <TableCell component="th" scope="row">
-                {row.cmnd}
-              </TableCell>
-              <TableCell>{row.dinhdanh}</TableCell>
-              <TableCell>{row.bidanh}</TableCell>
-              <TableCell>{row.songaunhien}</TableCell>
-              <TableCell>{row.tinhtrang}</TableCell>
-              <TableCell>{row.chukybidanh}</TableCell>
-              <TableCell>{row.chukydinhdanh}</TableCell>
-            </TableRow>
-          ))}
+          {rows &&
+            rows.map((row, index) => (
+              <TableRow key={index}>
+                <TableCell component="th" scope="row">
+                  {row.cmnd}
+                </TableCell>
+                <TableCell>{row.dinhdanh}</TableCell>
+                <TableCell>{row.bidanh}</TableCell>
+                <TableCell>{row.songaunhien}</TableCell>
+                <TableCell>{row.tinhtrang}</TableCell>
+                {/* <TableCell>{row.chukybidanh}</TableCell> */}
+                <TableCell>{row.chukydinhdanh}</TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>

@@ -1,18 +1,20 @@
 import { Button } from "@material-ui/core";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import DanhsachdangkyTable from "../components/DanhsachdangkyTable";
 import Kiemtracapchuky from "../components/Kiemtracapchuky";
-const data = [
-  { cmnd: 123123, bidanh: "afaf2d2f" },
-  { cmnd: 565444, bidanh: "adsada" },
-];
+
 function Danhsachdangky() {
   const [isOpen, setOpen] = useState(true);
   const [select, setSelect] = useState({});
+  const [danhsachdangky, setDanhsachdangky] = useState([]);
 
-  const handleClickButton = () => {
-    setOpen(!isOpen);
-  };
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "https://localhost:4000/api/chuky",
+    }).then((res) => setDanhsachdangky(res.data));
+  }, [isOpen]);
 
   return (
     <div className="main">
@@ -21,12 +23,12 @@ function Danhsachdangky() {
         {!isOpen && <div className="title">Kiểm tra đăng ký</div>}
         {isOpen && (
           <DanhsachdangkyTable
-            data={data}
+            data={danhsachdangky}
             setSelect={setSelect}
             setOpen={setOpen}
           />
         )}
-        {!isOpen && <Kiemtracapchuky data={select} setOpen={setOpen} />}
+
         {/* <Button
           variant="contained"
           color="primary"
@@ -37,6 +39,7 @@ function Danhsachdangky() {
           Kiểm tra
         </Button> */}
       </div>
+      {!isOpen && <Kiemtracapchuky data={select} setOpen={setOpen} />}
     </div>
   );
 }
