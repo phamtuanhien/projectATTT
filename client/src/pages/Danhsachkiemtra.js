@@ -1,20 +1,30 @@
 import { Button } from "@material-ui/core";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import DanhsachkiemtraTable from "../components/DanhsachkiemtraTable";
 import Kiemtraphieu from "../components/Kiemtraphieu";
-const data = [
-  { chuky: "3e4f", dinhdanh: "Vũ Hoàng Phúc" },
-  { chuky: "1a2b3c", dinhdanh: "Hiên" },
-];
+
 function Danhsachkiemtra() {
   const [isOpen, setOpen] = useState(false);
   const [select, setSelect] = useState("");
+  const [danhsachkiemtra, setDanhsachkiemtra] = useState([]);
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "https://localhost:4000/api/phieubau",
+    }).then((res) => {
+      setDanhsachkiemtra(res.data);
+      console.log(res.data);
+    });
+  }, [isOpen]);
+
   return (
     <div className="main">
       <div style={{ width: "900px", margin: "auto" }}>
         <div className="title">Danh sách phiếu cần kiểm tra</div>
         <DanhsachkiemtraTable
-          data={data}
+          data={danhsachkiemtra}
           select={select}
           setSelect={setSelect}
         />

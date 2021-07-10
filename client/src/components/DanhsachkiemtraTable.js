@@ -16,8 +16,12 @@ const useStyles = makeStyles({
 function DanhsachkiemtraTable({ data: rows, setSelect, select }) {
   const classes = useStyles();
   const handleOnClick = (e, k) => {
-    setSelect(k);
-    console.log(k);
+    setSelect({
+      cmnd: k.cmnd,
+      chuky: k.chuky,
+      dinhdanh: k.dinhdanh,
+      content: k.content,
+    });
   };
 
   return (

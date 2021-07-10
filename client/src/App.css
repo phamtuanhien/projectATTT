@@ -215,3 +215,40 @@ body {
   justify-content: space-around;
   justify-content: center;
 }
+
+.hehe {
+  display: flex;
+}
+
+.danhsachungvien {
+  margin-left: 20px;
+  padding: 10px 0px;
+  flex-grow: 1;
+  height: 275px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.ungvien+.ungvien{
+  margin-top: 10px;
+}
+.ungvien {
+  padding: 0 20px;
+  font-size: 20px;
+  background-color: #f0f0f0;
+  height: 110px;
+  display: flex;
+  border-radius: 10px;
+  cursor: pointer;
+
+}
+.ungvien:hover{
+  background-color: #ddd;
+}
+.ungvien.active{
+  color: #fff;
+  background-color: var(--generic-bg);
+}
+
+.avatar img {
+  object-fit: cover;
+}

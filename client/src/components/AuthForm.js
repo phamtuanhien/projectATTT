@@ -1,12 +1,34 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import axios from "axios";
 function AuthForm({ closeAuth }) {
   const [dinhdanh, setDinhdanh] = useState("");
   const [chuky, setChuky] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(dinhdanh, chuky);
+    axios({
+      method: "post",
+      url: "https://localhost:4000/api/chuky/kiemtra",
+      data: {
+        dinhdanh: dinhdanh,
+        chuky: chuky,
+      },
+    })
+      .then((res) => {
+        if (res.data == "True") {
+          alert("Chữ ký của bạn là hợp lệ");
+        } else {
+          alert("Có gì đấy sai sai!");
+        }
+      })
+      .catch((err) => alert("Vui lòng kiểm tra lại"))
+      .finally(() => {
+        setDinhdanh("");
+        setChuky("");
+      });
   };
 
   const handleOnChange = (e, type) => {

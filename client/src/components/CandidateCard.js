@@ -1,6 +1,15 @@
 import React from "react";
 
-function CandidateCard({ ungvien }) {
+function CandidateCard({ ungvien, thongke }) {
+  let sum = 0;
+  let sl = 0;
+  for (const o of thongke) {
+    sum += o.Sum;
+    if (o.ungvienID == ungvien.ungvienID) {
+      sl = o.Sum;
+    }
+  }
+
   return (
     <div className="card">
       <div className="avatar">
@@ -14,7 +23,9 @@ function CandidateCard({ ungvien }) {
       </div>
       <div className="sophieu-wrap">
         <div className="sophieu">
-          <div className="sophieuu">{ungvien.sophieu}</div>
+          <div className="sophieuu">
+            {sl}/{sum}
+          </div>
         </div>
       </div>
     </div>
