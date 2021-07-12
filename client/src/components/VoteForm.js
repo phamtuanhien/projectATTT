@@ -1,8 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
+import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import { Button } from "@material-ui/core";
 import axios from "axios";
@@ -17,6 +14,9 @@ function VoteForm({ closeVote }) {
     axios({
       method: "get",
       url: "https://localhost:4000/api/ungvien",
+      headers: {
+        token: localStorage.getItem("token"),
+      },
     }).then((res) => setDanhsachungvien(res.data));
   }, []);
 
@@ -45,6 +45,9 @@ function VoteForm({ closeVote }) {
           chuky: chuky,
           dinhdanh: dinhdanh,
           ungvienID: ungvienID,
+        },
+        headers: {
+          token: localStorage.getItem("token"),
         },
       })
         .then((res) => {
@@ -101,11 +104,12 @@ function VoteForm({ closeVote }) {
             }}
           />
           <Button
+            style={{ marginTop: "10px" }}
+            className="nice-button"
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
-            className="submit-vote"
             autoComplete="off"
           >
             Xác nhận
@@ -113,10 +117,11 @@ function VoteForm({ closeVote }) {
         </FormControl>
       </form>
       <div className="danhsachungvien">
+        <p className="hihi">Chọn ứng viên</p>
         {danhsachungvien.map((ungvien, index) => (
           <div
             key={index}
-            className={"ungvien " + (index == select ? "active" : "")}
+            className={"ungvien " + (index === select ? "active" : "")}
             onClick={(e) => {
               handleOnClick(ungvien.ungvienID, index);
             }}
@@ -124,7 +129,10 @@ function VoteForm({ closeVote }) {
             <div className="avatar">
               <img src={ungvien.anh} alt="avatar" />
             </div>
-            <div className="flex" style={{ flexGrow: "1" }}>
+            <div
+              className="flex"
+              style={{ flexGrow: "1", justifyContent: "flex-start" }}
+            >
               <div style={{ marginLeft: "20px", width: "270px" }}>
                 <p>Họ tên: {ungvien.hoten}</p>
                 <p>Quê Quán: {ungvien.diachi}</p>
@@ -134,11 +142,11 @@ function VoteForm({ closeVote }) {
                 <p>Chức vụ: {ungvien.chucvu}</p>
               </div>
             </div>
-            <div className="sophieu-wrap">
+            {/* <div className="sophieu-wrap">
               <div className="sophieu">
                 <div className="sophieuu">{ungvien.sophieu}</div>
               </div>
-            </div>
+            </div> */}
           </div>
         ))}
       </div>

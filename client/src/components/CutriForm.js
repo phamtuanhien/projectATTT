@@ -168,11 +168,11 @@ function CutriForm({ closeCutri, themCutri }) {
         </div>
       </div>
       <Button
+        className="nice-button"
         type="submit"
         fullWidth
         variant="contained"
         color="primary"
-        className="submit"
         autoComplete="off"
       >
         Thêm

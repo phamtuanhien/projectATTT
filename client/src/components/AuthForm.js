@@ -16,9 +16,12 @@ function AuthForm({ closeAuth }) {
         dinhdanh: dinhdanh,
         chuky: chuky,
       },
+      headers: {
+        token: localStorage.getItem("token"),
+      },
     })
       .then((res) => {
-        if (res.data == "True") {
+        if (res.data === "True") {
           alert("Chữ ký của bạn là hợp lệ");
         } else {
           alert("Có gì đấy sai sai!");
@@ -70,11 +73,11 @@ function AuthForm({ closeAuth }) {
         }}
       />
       <Button
+        className="nice-button"
         type="submit"
         fullWidth
         variant="contained"
         color="primary"
-        className="submit-register"
         autoComplete="off"
       >
         Check

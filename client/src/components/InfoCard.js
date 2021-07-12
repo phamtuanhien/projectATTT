@@ -1,21 +1,20 @@
 import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
-import { useContext } from "react";
 import { useState } from "react";
-import { UserContext } from "../contexts/userContext";
 
 function InfoCard() {
-  const user = JSON.parse(localStorage.getItem("user"));
   const [info, setInfo] = useState();
 
   useEffect(() => {
-    console.log(user);
+    const user = JSON.parse(localStorage.getItem("user"));
     user &&
       axios({
         method: "get",
         url: `https://localhost:4000/api/cutri/infocmnd/${user.username}`,
-        header: { token: localStorage.getItem("token") },
+        headers: {
+          token: localStorage.getItem("token"),
+        },
       }).then((res) => setInfo(res.data));
   }, []);
 

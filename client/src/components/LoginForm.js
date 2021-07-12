@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import { useState } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
@@ -28,7 +30,7 @@ function LoginForm(props) {
     setPassword("");
   };
 
-  const handleChange = (event, type) => {
+  const handleOnChange = (event, type) => {
     if (type === "username") {
       setUsername(event.target.value);
     } else {
@@ -37,44 +39,49 @@ function LoginForm(props) {
   };
 
   return (
-    <div className="login-form">
+    <div style={{ width: "500px", margin: "auto", marginTop: "200px" }}>
+      <div style={{ fontSize: "28px" }}>Login</div>
       <form onSubmit={handleSubmit}>
-        <div className="form-field">
-          <label htmlFor="username" className="label">
-            Tên đăng nhập:
-          </label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            className="input"
-            autoComplete="off"
-            value={username}
-            onChange={(e) => {
-              handleChange(e, "username");
-            }}
-          />
-        </div>
-        <div className="form-field">
-          <label htmlFor="password" className="label">
-            Mật khẩu:
-          </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={password}
-            className="input"
-            autoComplete="off"
-            onChange={(e) => {
-              handleChange(e, "password");
-            }}
-          />
-        </div>
-
-        <button type="submit" className="submit-button">
+        <TextField
+          variant="outlined"
+          margin="normal"
+          fullWidth
+          id="username"
+          value={username}
+          label="Tên tài khoản"
+          name="username"
+          required
+          autoComplete="off"
+          onChange={(e) => {
+            handleOnChange(e, e.target.name);
+          }}
+        />
+        <TextField
+          type="password"
+          variant="outlined"
+          margin="normal"
+          fullWidth
+          id="password"
+          value={password}
+          label="Mật khẩu"
+          name="password"
+          autoComplete="off"
+          required
+          onChange={(e) => {
+            handleOnChange(e, e.target.name);
+          }}
+        />
+        <Button
+          style={{ marginTop: "15px" }}
+          className="nice-button"
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          autoComplete="off"
+        >
           Submit
-        </button>
+        </Button>
       </form>
     </div>
   );

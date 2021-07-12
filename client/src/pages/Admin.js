@@ -8,7 +8,11 @@ function Admin() {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:4000/api/account`)
+      .get(`https://localhost:4000/api/account`, {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      })
       .then((res) => setaccountList(res.data));
   }, []);
 

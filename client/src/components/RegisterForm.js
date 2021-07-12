@@ -3,14 +3,12 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 function RegisterForm({ closeRegis, newRegis }) {
-  const [cmnd, setCmnd] = useState("");
   const [dinhdanh, setDinhdanh] = useState("");
   const [songaunhien, setSongaunhien] = useState("");
   const [bidanh, setBidanh] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(cmnd, dinhdanh, songaunhien, bidanh);
     const o = {
       cmnd: JSON.parse(localStorage.getItem("user")).username,
       dinhdanh: dinhdanh,
@@ -26,11 +24,14 @@ function RegisterForm({ closeRegis, newRegis }) {
   };
 
   const taobidanh = () => {
-    if (dinhdanh != "") {
+    if (dinhdanh !== "") {
       axios({
         method: "post",
         url: "https://localhost:4000/api/chuky/bidanh",
         data: { dinhdanh: dinhdanh },
+        headers: {
+          token: localStorage.getItem("token"),
+        },
       }).then((res) => {
         console.log(res.data);
         setSongaunhien(res.data.r);
@@ -68,11 +69,11 @@ function RegisterForm({ closeRegis, newRegis }) {
         }}
       />
       <Button
+        className="nice-button"
         style={{ marginTop: "15px", marginBottom: "10px" }}
         fullWidth
         variant="contained"
         color="primary"
-        className="submit-register"
         autoComplete="off"
         onClick={taobidanh}
       >
@@ -101,11 +102,11 @@ function RegisterForm({ closeRegis, newRegis }) {
         autoComplete="off"
       />
       <Button
+        className="nice-button"
         type="submit"
         fullWidth
         variant="contained"
         color="primary"
-        className="submit-register"
         autoComplete="off"
       >
         Submit

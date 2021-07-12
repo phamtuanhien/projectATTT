@@ -22,7 +22,7 @@ function DanhsachdangkyTable({ data: rows, setSelect, setOpen }) {
 
   return (
     <div>
-      {rows.length != 0 && (
+      {rows.length !== 0 && (
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
@@ -50,7 +50,7 @@ function DanhsachdangkyTable({ data: rows, setSelect, setOpen }) {
           </Table>
         </TableContainer>
       )}
-      {rows.length == 0 && (
+      {rows.length === 0 && (
         <p style={{ fontSize: "20px" }}>Không có chữ ký cần cấp</p>
       )}
     </div>

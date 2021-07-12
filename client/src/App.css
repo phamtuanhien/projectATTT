@@ -46,7 +46,7 @@ body {
   margin-left: 15px;
 }
 .link:hover {
-  border-bottom: 1px solid #fff;
+  border-bottom: 2px solid #fff;
 }
 
 .main {
@@ -73,18 +73,24 @@ body {
 }
 
 .card {
-  /* height: 150px; */
-  background-color: bisque;
+  background-color: #F8F8FA;
+  box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
   display: flex;
-  border-radius: 5px;
-  padding: 10px;
+  border-radius: 10px;
+  transition: all 0.3s;
 }
+
+.card:hover{
+  box-shadow: rgb(100 100 111 / 40%) 0px 7px 29px 0px;
+}
+
 .card + .card {
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 .avatar {
   align-self: center;
+  padding: 0 20px;
 }
 .avatar img {
   border-radius: 50%;
@@ -93,7 +99,6 @@ body {
 }
 
 .card__info {
-  margin-left: 20px;
 }
 
 .sophieu-wrap {
@@ -101,14 +106,16 @@ body {
   display: flex;
   justify-content:flex-end;
   align-items: center;
+  margin-right: 20px;
 }
 .sophieu {
   position: relative;
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background-color: aliceblue;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
+
 .sophieuu {
   position: absolute;
   top:50%;
@@ -176,6 +183,7 @@ body {
   max-width: 700px;
   margin: auto;
   margin-top: 20px;
+  animation: fadeIn 0.3s
 }
 
 .center {
@@ -188,7 +196,8 @@ body {
   display: flex;
   padding: 30px;
   max-width: 600px;
-  background-color: #f0f0f0;
+  background-color: #F8F8FA;
+  box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
   margin: auto;
   /* color: white; */
 }
@@ -218,21 +227,35 @@ body {
 
 .hehe {
   display: flex;
+  animation: fadeIn .5s;
 }
 
 .danhsachungvien {
+  padding: 20px;
   margin-left: 20px;
-  padding: 10px 0px;
   flex-grow: 1;
-  height: 275px;
+  height: 285px;
   overflow: scroll;
   overflow-x: hidden;
+  overflow-y: auto;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  position: relative;
+  /* border-radius: 10px; */
 }
+
+.hihi {
+  position: sticky;
+  background-color: #f8f8f8;
+  top: 0;
+  height: 30px;
+  font-size: 24px;
+}
+
 .ungvien+.ungvien{
   margin-top: 10px;
 }
 .ungvien {
-  padding: 0 20px;
+  /* padding: 0 20px; */
   font-size: 20px;
   background-color: #f0f0f0;
   height: 110px;
@@ -251,4 +274,21 @@ body {
 
 .avatar img {
   object-fit: cover;
+}
+
+.nice-button {
+  background-color: var(--generic-bg);
+  color: #ffffff;
+}
+
+#anh {
+  margin: 10px 0;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;} to {opacity: 1;}
+}
+
+.link-active {
+  border-bottom: 2px solid #fff;
 }

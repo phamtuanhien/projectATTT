@@ -1,6 +1,6 @@
 import { Button } from "@material-ui/core";
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 
 function Kiemtracapchuky({ data, setOpen }) {
   const { cmnd, bidanh } = data;
@@ -12,21 +12,21 @@ function Kiemtracapchuky({ data, setOpen }) {
         cmnd: cmnd,
         bidanh: bidanh,
       },
+      headers: {
+        token: localStorage.getItem("token"),
+      },
     }).then((res) => {
       console.log("Ban kiem tra cap chu ky thanh cong");
       setOpen(true);
     });
   };
-  const done = () => {
-    setOpen(true);
-  };
 
   return (
     <div>
       <Button
+        className="nice-button"
         variant="contained"
         color="primary"
-        className="nice-button"
         onClick={() => {
           setOpen(true);
         }}
@@ -39,15 +39,15 @@ function Kiemtracapchuky({ data, setOpen }) {
       <p>Trạng thái: Đang chờ cấp</p>
       <div style={{ display: "flex", alignItems: "center" }}>
         <Button
+          className="nice-button"
           variant="contained"
           color="primary"
-          className="nice-button"
           onClick={capChuky}
         >
           Cấp chữ ký
         </Button>
       </div>
-      {/* <Button
+      {/* <Button className="nice-button" 
         variant="contained"
         color="primary"
         className="nice-button"

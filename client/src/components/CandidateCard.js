@@ -5,7 +5,7 @@ function CandidateCard({ ungvien, thongke }) {
   let sl = 0;
   for (const o of thongke) {
     sum += o.Sum;
-    if (o.ungvienID == ungvien.ungvienID) {
+    if (o.ungvienID === ungvien.ungvienID) {
       sl = o.Sum;
     }
   }

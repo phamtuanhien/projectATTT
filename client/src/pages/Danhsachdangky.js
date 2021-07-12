@@ -1,4 +1,3 @@
-import { Button } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DanhsachdangkyTable from "../components/DanhsachdangkyTable";
@@ -13,6 +12,9 @@ function Danhsachdangky() {
     axios({
       method: "get",
       url: "https://localhost:4000/api/chuky",
+      headers: {
+        token: localStorage.getItem("token"),
+      },
     }).then((res) => setDanhsachdangky(res.data));
   }, [isOpen]);
 
@@ -29,7 +31,7 @@ function Danhsachdangky() {
           />
         )}
 
-        {/* <Button
+        {/* <Button className="nice-button" 
           variant="contained"
           color="primary"
           className="nice-button"

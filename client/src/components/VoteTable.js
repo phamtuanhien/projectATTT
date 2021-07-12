@@ -16,6 +16,7 @@ const useStyles = makeStyles({
 
 function VoteTable({ data: rows }) {
   const classes = useStyles();
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -36,7 +37,7 @@ function VoteTable({ data: rows }) {
               </TableCell>
               <TableCell>{row.dinhdanh}</TableCell>
               <TableCell>{row.chuky}</TableCell>
-              <TableCell>{row.ungvienduocbau}</TableCell>
+              <TableCell>{row.ungvien}</TableCell>
               <TableCell>{row.tinhtrang}</TableCell>
             </TableRow>
           ))}

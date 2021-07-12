@@ -12,6 +12,9 @@ function Cutri() {
     axios({
       method: "get",
       url: "https://localhost:4000/api/cutri",
+      headers: {
+        token: localStorage.getItem("token"),
+      },
     }).then((res) => setdanhsachcutri(res.data));
   }, []);
 
@@ -20,6 +23,9 @@ function Cutri() {
       url: "https://localhost:4000/api/cutri/create",
       method: "post",
       data: o,
+      headers: {
+        token: localStorage.getItem("token"),
+      },
     }).then(() => {
       const _danhsachcutri = [...danhsachcutri];
       _danhsachcutri.push(o);
@@ -29,13 +35,13 @@ function Cutri() {
 
   return (
     <div className="main">
+      <div className="title">Danh sách cử tri</div>
       <CutriTable data={danhsachcutri} />
       <Button
+        className="nice-button"
         variant="contained"
         color="primary"
-        className="nice-button"
-        style={{ margin: "auto" }}
-        style={{ marginTop: "30px" }}
+        style={{ margin: "auto", marginTop: "30px" }}
         onClick={() => setOpenCutri(!openCutri)}
       >
         Thêm cử tri

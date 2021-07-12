@@ -18,6 +18,7 @@ import { useEffect } from "react";
 
 function App() {
   const { setUser } = useContext(UserContext);
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       const user = jwtDecode(localStorage.getItem("token")).data;

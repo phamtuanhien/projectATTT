@@ -12,6 +12,9 @@ function Cutri() {
     axios({
       method: "get",
       url: "https://localhost:4000/api/ungvien",
+      headers: {
+        token: localStorage.getItem("token"),
+      },
     }).then((res) => setDanhsachungvien(res.data));
   }, [openUngvien]);
 
@@ -20,6 +23,9 @@ function Cutri() {
       url: "https://localhost:4000/api/ungvien/create",
       method: "post",
       data: 0,
+      headers: {
+        token: localStorage.getItem("token"),
+      },
     }).then(() => {
       const _danhsachungvien = [...danhsachungvien];
       _danhsachungvien.push(o);
@@ -29,13 +35,13 @@ function Cutri() {
 
   return (
     <div className="main">
+      <div className="title">Danh sách ứng viên</div>
       <UngvienTable data={danhsachungvien} />
       <Button
+        className="nice-button"
         variant="contained"
         color="primary"
-        className="nice-button"
-        style={{ margin: "auto" }}
-        style={{ marginTop: "30px" }}
+        style={{ margin: "auto", marginTop: "30px" }}
         onClick={() => setOpenUngvien(!openUngvien)}
       >
         Thêm ứng viên

@@ -8,6 +8,9 @@ function Kiemtraphieu({ data, setOpen }) {
       method: "post",
       url: "https://localhost:4000/api/phieubau/themvaohom",
       data: data,
+      headers: {
+        token: localStorage.getItem("token"),
+      },
     })
       .then(() => {
         setOpen(false);
@@ -26,9 +29,9 @@ function Kiemtraphieu({ data, setOpen }) {
       </div>
       <p>Content: {data.content}</p>
       <Button
+        className="nice-button"
         variant="contained"
         color="primary"
-        className="nice-button"
         onClick={xacnhan}
       >
         Xác nhận

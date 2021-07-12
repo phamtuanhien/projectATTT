@@ -15,6 +15,9 @@ function Vote() {
       url: `https://localhost:4000/api/phieubau/info/${
         JSON.parse(localStorage.getItem("user")).username
       }`,
+      headers: {
+        token: localStorage.getItem("token"),
+      },
     }).then((res) => {
       setPhieubau([res.data]);
     });
@@ -28,9 +31,9 @@ function Vote() {
       <div className="title">Trạng thái phiếu</div>
       <VoteTable data={phieubau} />
       <Button
+        className="nice-button"
         variant="contained"
         color="primary"
-        className="nice-button"
         onClick={handleClickVote}
         style={{ margin: "20px 0" }}
       >

@@ -28,6 +28,7 @@ function CutriForm({ closeCutri, themCutri }) {
     const config = {
       headers: {
         "content-type": "multipart/form-data",
+        token: localStorage.getItem("token"),
       },
     };
 
@@ -195,23 +196,25 @@ function CutriForm({ closeCutri, themCutri }) {
           />
         </div>
       </div>
-
-      <input
-        style={{ marginBottom: "10px" }}
-        type="file"
-        name="anh"
-        id="anh"
-        onChange={(e) => {
-          const files = e.target.files;
-          setUploadfile(files[0]);
-        }}
-      />
+      <div>
+        <span style={{ fontSize: "20px" }}>Chọn ảnh đại diện: </span>
+        <input
+          type="file"
+          name="anh"
+          id="anh"
+          style={{ outline: "none" }}
+          onChange={(e) => {
+            const files = e.target.files;
+            setUploadfile(files[0]);
+          }}
+        />
+      </div>
       <Button
+        className="nice-button"
         type="submit"
         fullWidth
         variant="contained"
         color="primary"
-        className="submit"
         autoComplete="off"
       >
         Thêm

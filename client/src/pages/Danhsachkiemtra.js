@@ -13,6 +13,9 @@ function Danhsachkiemtra() {
     axios({
       method: "get",
       url: "https://localhost:4000/api/phieubau",
+      headers: {
+        token: localStorage.getItem("token"),
+      },
     }).then((res) => {
       setDanhsachkiemtra(res.data);
       console.log(res.data);
@@ -29,17 +32,17 @@ function Danhsachkiemtra() {
           setSelect={setSelect}
         />
         <Button
+          className="nice-button"
           style={{ marginTop: "20px" }}
           variant="contained"
           color="primary"
-          className="nice-button"
           onClick={() => {
             setOpen(!isOpen);
           }}
         >
           Kiểm tra
         </Button>
-        {isOpen && select != "" && (
+        {isOpen && select !== "" && (
           <Kiemtraphieu data={select} setOpen={setOpen} />
         )}
       </div>

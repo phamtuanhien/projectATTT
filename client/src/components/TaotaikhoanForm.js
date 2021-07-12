@@ -80,11 +80,11 @@ function TaotaikhoanForm({ addAccount }) {
         }}
       />
       <Button
+        className="nice-button"
         type="submit"
         fullWidth
         variant="contained"
         color="primary"
-        className="submit-register"
         autoComplete="off"
       >
         Tạo

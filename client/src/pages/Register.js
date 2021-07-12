@@ -18,6 +18,9 @@ function Register() {
       url: `https://localhost:4000/api/chuky/info/${
         JSON.parse(localStorage.getItem("user")).username
       }`,
+      headers: {
+        token: localStorage.getItem("token"),
+      },
     }).then((res) => {
       console.log(res.data);
       setRows([res.data]);
@@ -55,6 +58,9 @@ function Register() {
         dinhdanh: o.dinhdanh,
         r: o.songaunhien,
       },
+      headers: {
+        token: localStorage.getItem("token"),
+      },
     })
       .then((res) => {
         console.log("dang ky thanh cong");
@@ -74,17 +80,17 @@ function Register() {
       <RegisterTable data={rows} />
       <div className="button-holder">
         <Button
+          className="nice-button"
           variant="contained"
           color="primary"
-          className="nice-button"
           onClick={handleClickRegis}
         >
           Xin cấp chữ ký
         </Button>
         <Button
+          className="nice-button"
           variant="contained"
           color="primary"
-          className="nice-button"
           onClick={handleClickAuth}
         >
           Xác thực chũ ký
