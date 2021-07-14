@@ -39,6 +39,15 @@ module.exports.getInfo = async function(req,res){
                 }
             }
         )
+        if(phieubau){
+            const ungvienID = phieubau.getDataValue("ungvienID")
+            const ungvien = await Ungvien.findOne({
+                where : {
+                    ungvienID : ungvienID
+                }
+            })
+            return res.status(200).send({phieubau : phieubau, ungvien : ungvien})
+        }
     }
     return res.status(200).send(phieubau)
 }
