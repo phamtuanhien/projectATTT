@@ -33,12 +33,12 @@ function VoteTable({ data: rows }) {
           {rows.map((row, index) => (
             <TableRow key={index}>
               <TableCell component="th" scope="row">
-                {row.cmnd}
+                {row.phieubau.cmnd}
               </TableCell>
-              <TableCell>{row.dinhdanh}</TableCell>
-              <TableCell>{row.chuky}</TableCell>
-              <TableCell>{row.ungvien}</TableCell>
-              <TableCell>{row.tinhtrang}</TableCell>
+              <TableCell>{row.phieubau.dinhdanh}</TableCell>
+              <TableCell>{row.phieubau.chuky}</TableCell>
+              <TableCell>{row.ungvien.hoten}</TableCell>
+              <TableCell>{row.phieubau.tinhtrang}</TableCell>
             </TableRow>
           ))}
         </TableBody>
