@@ -18,15 +18,28 @@ function VoteForm({ closeVote }) {
         token: localStorage.getItem("token"),
       },
     }).then((res) => setDanhsachungvien(res.data));
+    axios({
+      method: "get",
+      url: `https://localhost:4000/api/chuky/info/${
+        JSON.parse(localStorage.getItem("user")).username
+      }`,
+      headers: {
+        token: localStorage.getItem("token"),
+      },
+    }).then((res) => {
+      // console.log(res.data);
+      setDinhdanh(res.data.dinhdanh);
+      setChuky(res.data.chuky);
+    });
   }, []);
 
-  const handleOnChange = (e, type) => {
-    if (type === "dinhdanh") {
-      setDinhdanh(e.target.value);
-    } else if (type === "chuky") {
-      setChuky(e.target.value);
-    }
-  };
+  // const handleOnChange = (e, type) => {
+  //   if (type === "dinhdanh") {
+  //     setDinhdanh(e.target.value);
+  //   } else if (type === "chuky") {
+  //     setChuky(e.target.value);
+  //   }
+  // };
 
   const handleOnClick = (ungvienID, index) => {
     setUngvienID(ungvienID);
@@ -54,7 +67,7 @@ function VoteForm({ closeVote }) {
           closeVote();
         })
         .catch((err) => {
-          alert(err.message);
+          alert("Đã bỏ phiếu trước đó!");
         });
     }
   };
@@ -76,6 +89,7 @@ function VoteForm({ closeVote }) {
             required
           />
           <TextField
+            disabled
             variant="outlined"
             margin="normal"
             fullWidth
@@ -85,9 +99,32 @@ function VoteForm({ closeVote }) {
             name="dinhdanh"
             autoComplete="off"
             required
-            onChange={(e) => {
-              handleOnChange(e, e.target.name);
-            }}
+          />
+          <TextField
+            disabled
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            id="chuky"
+            value={chuky}
+            label="Chữ ký"
+            name="chuky"
+            autoComplete="off"
+            required
+          />
+          {/* <TextField
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            id="dinhdanh"
+            value={dinhdanh}
+            label="Định danh"
+            name="dinhdanh"
+            autoComplete="off"
+            required
+            // onChange={(e) => {
+            //   handleOnChange(e, e.target.name);
+            // }}
           />
           <TextField
             variant="outlined"
@@ -99,10 +136,10 @@ function VoteForm({ closeVote }) {
             name="chuky"
             autoComplete="off"
             required
-            onChange={(e) => {
-              handleOnChange(e, e.target.name);
-            }}
-          />
+            // onChange={(e) => {
+            //   handleOnChange(e, e.target.name);
+            // }}
+          /> */}
           <Button
             style={{ marginTop: "10px" }}
             className="nice-button"

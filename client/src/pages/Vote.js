@@ -20,7 +20,6 @@ function Vote() {
       },
     }).then((res) => {
       setPhieubau([res.data]);
-      console.log(res.data);
     });
   }, [openVote]);
 
